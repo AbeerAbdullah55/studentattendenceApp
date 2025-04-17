@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AdminHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // التاريخ بنفس الصيغة اللي محفوظ فيها الـ doc داخل "Record"
     String todayDate = DateFormat('dd MMMM yyyy').format(DateTime.now());
 
     return Scaffold(
@@ -37,7 +36,6 @@ class AdminHomePage extends StatelessWidget {
               final employeeId = employeeData['id'] ?? 'غير معروف';
               final firstName = employeeData['firstName'] ?? 'غير معروف';
               final lastName = employeeData['lastName'] ?? '';
-
 
               return FutureBuilder<DocumentSnapshot>(
                 future: FirebaseFirestore.instance
@@ -82,6 +80,22 @@ class AdminHomePage extends StatelessWidget {
             },
           );
         },
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: ElevatedButton.icon(
+          icon: Icon(Icons.logout),
+          label: Text('تسجيل الخروج'),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 15),
+            backgroundColor: Colors.amber,
+            foregroundColor: Colors.white,
+          ),
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            Navigator.pushReplacementNamed(context, '/login');
+          },
+        ),
       ),
     );
   }

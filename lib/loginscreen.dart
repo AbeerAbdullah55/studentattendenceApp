@@ -9,6 +9,7 @@ import 'homescreen.dart';
 import 'model/user.dart';
 
 
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -21,7 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passController = TextEditingController();
   double screenHeight = 0;
   double screenWidth = 0;
-  Color primary = const Color(0xFFEDBA4B);
+  Color primary = const Color(0xFFFFFFFF);
+  Color secondry = const Color(0xFFEDBA4B);
   late SharedPreferences sharedPreferences;
 
   @override
@@ -53,13 +55,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 //     size: screenWidth / 5,
                 //   ),
                 // ),
-                child: Image.asset(
-                  'assets/images/logo.jpg',
-                  width: screenWidth / 1,
-                  height: screenWidth / 1,
-                  fit: BoxFit.contain,
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/logo.jpg',
+                    width: screenWidth / 1.4,
+                    height: screenWidth / 1.4,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-
 
               ),
               Container(
@@ -92,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: screenWidth,
                         margin: EdgeInsets.only(top: screenHeight / 40),
                         decoration: BoxDecoration(
-                          color: primary,
+                          color: secondry,
                           borderRadius:
                           const BorderRadius.all(Radius.circular(30)),
                         ),

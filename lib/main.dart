@@ -26,6 +26,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const Dashboardwithlogo(),
+
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+        // تقدر تضيف /profile إذا عندك صفحة ملف شخصي
+      },
     );
   }
 }
