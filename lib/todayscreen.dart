@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:my_flutter_project/model/user.dart';
+import 'package:my_flutter_project/services/location_service.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:location/location.dart';
 
 
 class TodayScreen extends StatefulWidget {
@@ -110,12 +112,33 @@ class _TodayScreenState extends State<TodayScreen> {
     }
   }
 
+  // Future<void> _getLocation() async {
+  //   List<Placemark> placemark = await placemarkFromCoordinates(User.lat, User.long);
+  //
+  //   setState(() {
+  //     location = "${placemark[0].street},${placemark[0].administrativeArea},${placemark[0].postalCode},${placemark[0].country} ";
+  //   });
+  // }
+
+
   Future<void> _getLocation() async {
-    List<Placemark> placemark = await placemarkFromCoordinates(User.lat, User.long);
+    final locService = LocationService();
+    await locService.initialize(); // تأكد من تفعيل الخدمة والصلاحيات
+
+    LocationData locData = await locService.getLocation();
+
+    List<Placemark> placemark = await placemarkFromCoordinates(
+      locData.latitude ?? 0.0,
+      locData.longitude ?? 0.0,
+    );
 
     setState(() {
-      location = "${placemark[0].street},${placemark[0].administrativeArea},${placemark[0].postalCode},${placemark[0].country} ";
+      location = "${placemark[0].street}, ${placemark[0].administrativeArea}, ${placemark[0].country}";
     });
+
+    // تحديث كلاس المستخدم
+    User.lat = locData.latitude ?? 0.0;
+    User.long = locData.longitude ?? 0.0;
   }
 
   void _getRecord() async {
