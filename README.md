@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # untitled2
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# studentattendenceApp
+>>>>>>> f0a516e260a9da70df066e1ec80c4fa963d8c861
